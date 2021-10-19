@@ -66,13 +66,13 @@ helm repo add signalfx https://dl.signalfx.com/helm-repo
 helm repo update
 wget https://raw.githubusercontent.com/signalfx/signalfx-agent/main/deployments/k8s/helm/signalfx-agent/values.yaml
 mv values.yaml values-smartagent.yaml
-helm install -f values-smartagent.yaml --set signalFxAccessToken=TOKEN --set clusterName=MyCluster --set agentVersion=5.1.6 --set signalFxRealm=us1 --generate-name signalfx/signalfx-agent
+helm install -f values-smartagent.yaml --set signalFxAccessToken=TOKEN --set clusterName=MyCluster --set agentVersion=5.14.2 --set signalFxRealm=us1 --generate-name signalfx/signalfx-agent
 ```
 ## Install OTel Collector
 ```
 helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart
 helm repo update
-wget https://github.com/signalfx/splunk-otel-collector-chart/blob/main/helm-charts/splunk-otel-collector/values.yaml
+wget https://raw.githubusercontent.com/signalfx/splunk-otel-collector-chart/main/helm-charts/splunk-otel-collector/values.yaml
 mv values.yaml values-otel.yaml
 ```
 - Edit values-otel.yaml
