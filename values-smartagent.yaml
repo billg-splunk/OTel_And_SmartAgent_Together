@@ -1,4 +1,4 @@
-traceEndpointUrl: "https://ingest.${SFX_REALM}.signalfx.com/v2/trace"
+traceEndpointUrl: "https://ingest.us1.signalfx.com/v2/trace"
 
 monitors:
 - type: signalfx-forwarder

@@ -98,6 +98,15 @@ k exec -it <splunk-otel-pod-name> -c otel-collector -- curl 127.0.0.1:9090
 # SmartAgent (configured for 9080, the default)
 k exec -it <smartagent-pod-name> -c signalfx-agent -- curl 127.0.0.1:9080
 ```
+- Review the configurations
+  - Smart Agent
+```
+k exec -it <smartagent-pod-name> -c signalfx-agent -- signalfx-agent status config
+```
+  - OTel Collector
+```
+
+```
 - Upgrading with helm
 ```
 helm upgrade <same values> <collector pod> <helm chart>
