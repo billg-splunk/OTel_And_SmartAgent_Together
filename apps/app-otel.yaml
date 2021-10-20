@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: server-flask-otel-k8s
-        image: docker.io/stevelsplunk/splk-python
+        image: app-otel
         ports:
           - name: http
             containerPort: 5000
