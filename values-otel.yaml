@@ -1,4 +1,10 @@
 otelAgent:
+  ports:
+    signalfx-forwarder:
+      containerPort: 9090
+      hostPort: 9090
+      protocol: TCP
+      enabled_for: [traces]
   config:
     receivers:
       smartagent/signalfx-forwarder:
