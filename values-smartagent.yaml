@@ -1,3 +1,5 @@
+traceEndpointUrl: "https://ingest.${SFX_REALM}.signalfx.com/v2/trace"
+
 monitors:
 - type: signalfx-forwarder
   listenAddress: 0.0.0.0:9080
