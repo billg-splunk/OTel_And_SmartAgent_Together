@@ -28,7 +28,7 @@ spec:
             fieldRef:
               fieldPath: status.hostIP
         - name: OTEL_EXPORTER_JAEGER_ENDPOINT
-          value: http://$(SPLUNK_OTEL_AGENT):14250
+          value: http://$(SPLUNK_OTEL_AGENT):9090/v1/trace
         - name: OTEL_TRACES_EXPORTER
           value: jaeger-thrift-splunk
         command: ["/bin/sh"]
@@ -66,7 +66,7 @@ spec:
         fieldRef:
           fieldPath: status.hostIP
     - name: OTEL_EXPORTER_JAEGER_ENDPOINT
-      value: http://$(SPLUNK_OTEL_AGENT):14250
+      value: http://$(SPLUNK_OTEL_AGENT):9090/v1/trace
     - name: OTEL_TRACES_EXPORTER
       value: jaeger-thrift-splunk
     command: ["/bin/sh"]
