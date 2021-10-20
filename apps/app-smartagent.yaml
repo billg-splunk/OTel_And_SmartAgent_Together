@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: server-flask-sa-k8s
-        image: app-sa
+        image: app-sa:latest
         ports:
           - name: http
             containerPort: 6000
@@ -55,7 +55,7 @@ metadata:
 spec:
   containers:
   - name: client-py-sa-k8s
-    image: docker.io/stevelsplunk/splk-python
+    image: app-sa:latest
     env:
     - name: OTEL_RESOURCE_ATTRIBUTES
       value: deployment.environment=app-smartagent

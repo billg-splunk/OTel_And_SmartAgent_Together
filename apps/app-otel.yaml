@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: server-flask-otel-k8s
-        image: app-otel
+        image: app-otel:latest
         ports:
           - name: http
             containerPort: 5000
@@ -55,7 +55,7 @@ metadata:
 spec:
   containers:
   - name: client-py-otel-k8s
-    image: docker.io/stevelsplunk/splk-python
+    image: app-otel:latest
     env:
     - name: OTEL_RESOURCE_ATTRIBUTES
       value: deployment.environment=app-otel
