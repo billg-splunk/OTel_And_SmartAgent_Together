@@ -80,3 +80,13 @@ mv values.yaml values-otel.yaml
 ```
 helm install --set provider=' ' --set distro=' ' --set splunkObservability.accessToken='TOKEN' --set clusterName='MyCluster' --set splunkObservability.realm='us1' --set otelCollector.enabled='false'  --set splunkObservability.logsEnabled='false'  --generate-name splunk-otel-collector-chart/splunk-otel-collector
 ```
+
+## Build the apps
+
+## Add the apps to microk8s
+```
+docker save app-otel > app-otel.tar
+docker save app-sa > app-sa.tar
+microk8s ctr image import app-otel.tar
+microk8s ctr image import app-sa.tar
+```
