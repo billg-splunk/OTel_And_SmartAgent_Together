@@ -67,12 +67,12 @@ git clone https://github.com/billg-splunk/OTel_And_SmartAgent_Together.git
 ## Install Smart Agent
 ```
 cd ~/OTel_And_SmartAgent_Together.git
-./deploySmartAgent.sh <token>
+source deploySmartAgent.sh <token>
 ```
 ## Install OTel Collector
 ```
 cd ~/OTel_And_SmartAgent_Together.git
-./deployOTel.sh <token>
+source deployOTel.sh <token>
 ```
 
 ## Build the apps
