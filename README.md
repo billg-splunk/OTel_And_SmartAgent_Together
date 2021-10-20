@@ -66,16 +66,13 @@ git clone https://github.com/billg-splunk/OTel_And_SmartAgent_Together.git
 ```
 ## Install Smart Agent
 ```
-helm repo add signalfx https://dl.signalfx.com/helm-repo
-helm repo update
-helm install --set signalFxAccessToken=TOKEN --set clusterName=MyCluster --set agentVersion=5.14.2 --set signalFxRealm=us1 --generate-name signalfx/signalfx-agent
+cd ~/OTel_And_SmartAgent_Together.git
+./deploySmartAgent.sh <token>
 ```
 ## Install OTel Collector
 ```
-helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart
-helm repo update
-cd ~/OTel_And_SmartAgent_Together
-helm install --set provider=' ' --set distro=' ' --set splunkObservability.accessToken='TOKEN' --set clusterName='MyCluster' --set splunkObservability.realm='us1' --set otelCollector.enabled='false'  --set splunkObservability.logsEnabled='false'  --generate-name splunk-otel-collector-chart/splunk-otel-collector
+cd ~/OTel_And_SmartAgent_Together.git
+./deployOTel.sh <token>
 ```
 
 ## Build the apps
@@ -94,6 +91,7 @@ k apply -f app-smartagent.yaml
 
 # Some other tricks for checking things
 - Test the endpoints to ensure it is listening 
+NOTE: These tests should be able to run from any container
 ```
 # OTel Collector (configured for 9090)
 k exec -it <splunk-otel-pod-name> -c otel-collector -- curl 127.0.0.1:9090
