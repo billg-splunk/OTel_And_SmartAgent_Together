@@ -93,6 +93,13 @@ k apply -f app-smartagent.yaml
 ```
 
 # Some other tricks for checking things
+- Test the endpoints to ensure it is listening 
+```
+# OTel Collector (configured for 9090)
+k exec -it <splunk-otel-pod-name> -c otel-collector -- curl 127.0.0.1:9090
+# SmartAgent (configured for 9080, the default)
+k exec -it <smartagent-pod-name> -c signalfx-agent -- curl 127.0.0.1:9080
+```
 - Upgrading with helm
 ```
 helm upgrade <same values> <collector pod> <helm chart>
