@@ -82,7 +82,10 @@ helm install --set provider=' ' --set distro=' ' --set splunkObservability.acces
 ```
 
 ## Build the apps
-
+The following will build the apps and deploy them to microk8s
+```
+dockerbuilds.sh
+```
 ## Add the apps to microk8s
 ```
 docker save app-otel > app-otel.tar
