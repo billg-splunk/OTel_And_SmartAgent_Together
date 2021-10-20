@@ -9,4 +9,4 @@ TOKEN=$1
 
 helm repo add signalfx https://dl.signalfx.com/helm-repo
 helm repo update
-helm install --set signalFxAccessToken=$TOKEN --set clusterName=MyClusterSA --set agentVersion=<version> --set signalFxRealm=<realm> --generate-name signalfx/signalfx-agent
+helm install --set signalFxAccessToken=$TOKEN --set clusterName=MyClusterSA --set agentVersion=5.14.2 --set signalFxRealm=us1 --generate-name signalfx/signalfx-agent
