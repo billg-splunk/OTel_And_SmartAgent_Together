@@ -33,7 +33,7 @@ spec:
         - name: OTEL_TRACES_EXPORTER
           value: jaeger-thrift-splunk
         command: ["/bin/sh"]
-        args: ["run-server.sh"]
+        args: ["run-server-otel.sh"]
 ---
 ### Flask Server Service
 apiVersion: v1

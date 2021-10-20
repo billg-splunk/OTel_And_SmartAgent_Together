@@ -107,12 +107,13 @@ helm upgrade <same values> <collector pod> <helm chart>
 - Checking logs
 ```
 k logs -f <pod>
+k logs -f <pod> -c <container>
 ```
 - Checking pods
 ```
 k describe po <pod>
 ```
-- Checking secrets (like the token)
+- Checking secrets (i.e. the token)
 ```
 k get secrets splunk-otel-collector -o yaml
 <Find the encoded token>
@@ -121,5 +122,5 @@ echo "<token>" | base64 --decode
 - Review configmap
 ```
 k get cm
-k edit cm <configmap>
+k edit cm <configmap> -o yaml
 ```
