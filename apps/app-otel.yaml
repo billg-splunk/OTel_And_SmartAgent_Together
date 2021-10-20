@@ -72,4 +72,4 @@ spec:
     - name: OTEL_TRACES_EXPORTER
       value: jaeger-thrift-splunk
     command: ["/bin/sh"]
-    args: ["run-client.sh"]
+    args: ["run-client-otel.sh"]

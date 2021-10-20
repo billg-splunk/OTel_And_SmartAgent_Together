@@ -42,11 +42,11 @@ multipass shell microk8s
 ## Check microk8s is ready
 ```
 microk8s status --wait-ready
+microk8s kubectl get no
+microk8s kubectl get svc
 ```
 ## OPTIONAL: Alias kubectl and un kubectl commands
 ```
-microk8s kubectl get no
-microk8s kubectl get svc
 alias k='microk8s kubectl'
 ```
 ## Install Docker
@@ -59,37 +59,60 @@ sudo usermod -aG docker ${USER}
 exit
 multipass shell microk8s
 ```
-
+## Download this repo
+```
+cd ~
+git clone https://github.com/billg-splunk/OTel_And_SmartAgent_Together.git
+```
 ## Install Smart Agent
 ```
 helm repo add signalfx https://dl.signalfx.com/helm-repo
 helm repo update
-wget https://raw.githubusercontent.com/signalfx/signalfx-agent/main/deployments/k8s/helm/signalfx-agent/values.yaml
-mv values.yaml values-smartagent.yaml
-helm install -f values-smartagent.yaml --set signalFxAccessToken=TOKEN --set clusterName=MyCluster --set agentVersion=5.14.2 --set signalFxRealm=us1 --generate-name signalfx/signalfx-agent
+helm install --set signalFxAccessToken=TOKEN --set clusterName=MyCluster --set agentVersion=5.14.2 --set signalFxRealm=us1 --generate-name signalfx/signalfx-agent
 ```
 ## Install OTel Collector
 ```
 helm repo add splunk-otel-collector-chart https://signalfx.github.io/splunk-otel-collector-chart
 helm repo update
-wget https://raw.githubusercontent.com/signalfx/splunk-otel-collector-chart/main/helm-charts/splunk-otel-collector/values.yaml
-mv values.yaml values-otel.yaml
-```
-- Edit values-otel.yaml
-- Replace 9080 with 9090
-```
+cd ~/OTel_And_SmartAgent_Together
 helm install --set provider=' ' --set distro=' ' --set splunkObservability.accessToken='TOKEN' --set clusterName='MyCluster' --set splunkObservability.realm='us1' --set otelCollector.enabled='false'  --set splunkObservability.logsEnabled='false'  --generate-name splunk-otel-collector-chart/splunk-otel-collector
 ```
 
 ## Build the apps
 The following will build the apps and deploy them to microk8s
 ```
-dockerbuilds.sh
+cd ~/OTel_And_SmartAgent_Together/apps
+source dockerbuilds.sh
 ```
-## Add the apps to microk8s
+
+## Deploy the apps
 ```
-docker save app-otel > app-otel.tar
-docker save app-sa > app-sa.tar
-microk8s ctr image import app-otel.tar
-microk8s ctr image import app-sa.tar
+cd ~/OTel_And_SmartAgent_Together/apps
+k apply -f app-otel.yaml
+k apply -f app-smartagent.yaml
+```
+
+# Some other tricks for checking things
+- Upgrading with helm
+```
+helm upgrade <same values> <collector pod> <helm chart>
+```
+- Checking logs
+```
+k logs -f <pod>
+```
+- Checking pods
+```
+k describe po <pod>
+```
+- Checking secrets (like the token)
+```
+k get secrets splunk-otel-collector -o yaml
+<Find the encoded token>
+echo "<token>" | base64 --decode
+```
+- Review configmap
+```
+k get cm
+k edit cm <configmap>
 ```
