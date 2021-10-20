@@ -91,43 +91,38 @@ k apply -f app-smartagent.yaml
 
 # Some other tricks for checking things
 - Test the endpoints to ensure it is listening 
-- NOTE: These tests should be able to run from any container
+  - NOTE: These tests should be able to run from any container
 ```
 # OTel Collector (configured for 9090)
 k exec -it <splunk-otel-pod-name> -c otel-collector -- curl 127.0.0.1:9090
 # SmartAgent (configured for 9080, the default)
 k exec -it <smartagent-pod-name> -c signalfx-agent -- curl 127.0.0.1:9080
 ```
-- Review the configurations
-  - Smart Agent
+- Review the configuration (Smart Agent)
 ```
 k exec -it <smartagent-pod-name> -c signalfx-agent -- signalfx-agent status config
 ```
-  - OTel Collector
+- Review the configuration (OTel Collector)
 ```
-
+k get cm
+k get cm <splunk-otel-collector-###-otel-agent> -o yaml
 ```
-- Upgrading with helm
+- Upgrade with helm
 ```
 helm upgrade <same values> <collector pod> <helm chart>
 ```
-- Checking logs
+- Check logs
 ```
 k logs -f <pod>
 k logs -f <pod> -c <container>
 ```
-- Checking pods
+- Check pods
 ```
 k describe po <pod>
 ```
-- Checking secrets (i.e. the token)
+- Check secrets (i.e. the token)
 ```
 k get secrets splunk-otel-collector -o yaml
 <Find the encoded token>
 echo "<token>" | base64 --decode
-```
-- Review configmap
-```
-k get cm
-k edit cm <configmap> -o yaml
 ```
