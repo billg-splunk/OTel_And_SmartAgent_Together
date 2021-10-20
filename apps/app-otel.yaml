@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: server-flask-otel-k8s
-        image: app-otel:local
+        image: app-otel:latest
         imagePullPolicy: Never
         ports:
           - name: http
@@ -56,7 +56,7 @@ metadata:
 spec:
   containers:
   - name: client-py-otel-k8s
-    image: app-otel:local
+    image: app-otel:latest
     imagePullPolicy: Never
     env:
     - name: OTEL_RESOURCE_ATTRIBUTES
