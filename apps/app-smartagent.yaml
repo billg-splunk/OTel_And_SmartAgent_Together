@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: server-flask-sa-k8s
-        image: app-sa:latest
+        image: app-sa:local
+        imagePullPolicy: Never
         ports:
           - name: http
             containerPort: 6000
@@ -55,7 +56,8 @@ metadata:
 spec:
   containers:
   - name: client-py-sa-k8s
-    image: app-sa:latest
+    image: app-sa:local
+    imagePullPolicy: Never
     env:
     - name: OTEL_RESOURCE_ATTRIBUTES
       value: deployment.environment=app-smartagent
