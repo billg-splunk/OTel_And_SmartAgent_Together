@@ -2,7 +2,7 @@
 if [ $# != 1 ]
 then
   echo "Usage: ./deploySmartAgent.sh <token>"
-  exit 1
+  return 1 2> /dev/null || exit 1
 fi
 
 TOKEN=$1
