@@ -1,4 +1,4 @@
-otelAgent:
+agent:
   config:
     receivers:
       smartagent/signalfx-forwarder:
