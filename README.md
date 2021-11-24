@@ -5,9 +5,10 @@ NOTE: This is a work in progress
 ## Summary of Steps
 - Install Multipass & VirtualBox
 - Install microk8s
+- Install helm
+- Install Docker
 - Deploy the Smart Agent
 - Deploy the OTel Collector (using port 9090 instead)
-- Install Docker
 - Create images of simple python script calling OTel and SA
 - Deploy applications
 
@@ -45,9 +46,14 @@ microk8s status --wait-ready
 microk8s kubectl get no
 microk8s kubectl get svc
 ```
-## OPTIONAL: Alias kubectl and un kubectl commands
+## Install helm
 ```
-alias k='microk8s kubectl'
+microk8s enable helm3
+```
+## Alias kubectl and helm
+```
+echo "alias k='microk8s kubectl'" >> .bashrc
+echo "alias helm='microk8s helm3'" >> .bashrc
 ```
 ## Install Docker
 ```
